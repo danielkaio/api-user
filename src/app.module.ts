@@ -1,8 +1,8 @@
-import { Module, OnModuleInit } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './usuario/usuario';
-import { Sequelize } from 'sequelize-typescript';
+import { User } from './repository/UserRepository';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -19,22 +19,8 @@ import { Sequelize } from 'sequelize-typescript';
       sync: { force: true },
       logging: console.log,
     }),
+    UserModule,
   ],
   controllers: [AppController],
-  providers: [],
 })
-export class AppModule implements OnModuleInit {
-  constructor(private sequelize: Sequelize) {}
-
-  async onModuleInit() {
-    try {
-      await this.sequelize.authenticate();
-      console.log('Database connection successful');
-      
-      await this.sequelize.sync({ force: true });
-      console.log('Tables synchronized successfully');
-    } catch (error) {
-      console.error('Database initialization failed:', error);
-    }
-  }
-}
+export class AppModule {}
