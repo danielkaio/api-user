@@ -6,7 +6,7 @@ import { getModelToken } from '@nestjs/sequelize';
 describe('UserService', () => {
   let service: UserService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const mockUserModel = {
       findAll: jest.fn().mockResolvedValue([
         {
@@ -41,7 +41,7 @@ describe('UserService', () => {
     expect(result[0].nome).toBe('João');
   });
 
-  it('excluirTodos deve deletar todos os usuários', () => {
+  it('deleteAll deve deletar todos os usuários', () => {
     service.deleteAll();
     expect(true).toBe(true);
   });

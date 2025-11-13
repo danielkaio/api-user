@@ -23,5 +23,5 @@
     "noFallthroughCasesInSwitch": false
   },
   "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.config.js"]
+  "exclude": ["node_modules", "dist", "seeders", "migrations", "config", "**/*.config.js"]
 }
