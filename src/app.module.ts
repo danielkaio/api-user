@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './repository/UserRepository';
 import { UserModule } from './user/user.module';
@@ -21,6 +20,5 @@ import { UserModule } from './user/user.module';
     }),
     UserModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

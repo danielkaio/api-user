@@ -12,4 +12,10 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.UserModel.findAll();
   }
+
+  deleteAll(): void {
+    void this.UserModel.destroy({
+      truncate: true,
+    });
+  }
 }

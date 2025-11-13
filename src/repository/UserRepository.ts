@@ -6,5 +6,5 @@ export class User extends Model {
   nome: string;
 
   @Column({ defaultValue: true })
-  isactive: true;
+  isactive: boolean;
 }
