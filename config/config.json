@@ -1,26 +1,23 @@
 {
   "development": {
     "username": "root",
-    "password": "12345",
+    "password": null,
     "database": "dev",
     "host": "172.17.0.2",
-    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "12345",
-    "database": "dev_test",
-    "host": "172.17.0.2",
-    "port": 3306,
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "12345",
-    "database": "dev_prod",
-    "host": "172.17.0.2",
-    "port": 3306,
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }

@@ -18,4 +18,17 @@ export class UserService {
       truncate: true,
     });
   }
+
+  async findOne(id: number): Promise<any> {
+    const user = await this.UserModel.findOne<User>({
+      where: { id },
+      raw: true,
+    });
+
+    if (!user) {
+      throw new Error('Usuário não existe');
+    }
+
+    return user;
+  }
 }
