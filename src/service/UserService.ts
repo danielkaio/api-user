@@ -31,4 +31,8 @@ export class UserService {
 
     return user;
   }
+
+  async create(data): Promise<User> {
+    return this.UserModel.create(data);
+  }
 }
