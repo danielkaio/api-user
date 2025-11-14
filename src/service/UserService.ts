@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from 'src/repository/UserRepository';
 
@@ -19,6 +19,15 @@ export class UserService {
     });
   }
 
+  async deleteOne(id: number) {
+    const user = await this.UserModel.destroy({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException('usuario não encontrado ');
+    }
+  }
   async findOne(id: number): Promise<any> {
     const user = await this.UserModel.findOne<User>({
       where: { id },
@@ -26,13 +35,22 @@ export class UserService {
     });
 
     if (!user) {
-      throw new Error('Usuário não existe');
+      throw new NotFoundException('Usuário não existe');
     }
 
     return user;
   }
 
+  async Update(id: number, data: any): Promise<any> {
+    const user = await this.UserModel.findByPk(id);
+    if (!user) throw new Error('Usuário não existe');
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    return user.update(data);
+  }
+
   async create(data): Promise<User> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return this.UserModel.create(data);
   }
 }
