@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { UserService } from './service/UserService';
 import { User } from './repository/UserRepository';
 
@@ -24,5 +24,9 @@ export class UserController {
   @Delete('/')
   removeAll(): void {
     void this.userService.deleteAll();
+  }
+  @Post('/')
+  create(@Body() body: User) {
+    return this.userService.create(body);
   }
 }

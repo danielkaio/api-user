@@ -30,11 +30,9 @@ export class AppModule implements OnModuleInit {
       await this.sequelize.authenticate();
       console.log('✓ Database connection established');
 
-      // Sincronizar modelos
       await this.sequelize.sync({ force: true });
       console.log('✓ Tables synchronized');
 
-      // Verificar se existem usuários
       const userCount = await User.count();
       if (userCount === 0) {
         console.log('Seeding database with initial data...');
