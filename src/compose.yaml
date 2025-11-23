@@ -1,15 +1,15 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8
     container_name: meu_mysql
+    env_file:
+      - .env
     environment:
-      MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: dev
-      MYSQL_USER: devuser
-      MYSQL_PASSWORD: 12345
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
     ports:
-      - "3306:3306"
+      - "${DB_PORT}:3306"
     volumes:
       - ./dados:/var/lib/mysql
