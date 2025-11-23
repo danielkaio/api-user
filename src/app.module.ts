@@ -3,22 +3,33 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './repository/UserRepository';
 import { UserModule } from './user/user.module';
 import { Sequelize } from 'sequelize-typescript';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    SequelizeModule.forRoot({
-      dialect: 'mysql',
-      host: '172.21.0.2',
-      port: 3306,
-      username: 'devuser',
-      password: '12345',
-      database: 'dev',
-      models: [User],
-      autoLoadModels: true,
-      synchronize: true,
-      sync: { force: true },
-      logging: console.log,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
     }),
+
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        dialect: 'mysql',
+        host: config.get<string>('DB_HOST'),
+        port: config.get<number>('DB_PORT'),
+        username: config.get<string>('DB_USER'),
+        password: config.get<string>('DB_PASS'),
+        database: config.get<string>('DB_NAME'),
+        models: [User],
+        autoLoadModels: true,
+        synchronize: true,
+        sync: { force: true },
+        logging: console.log,
+      }),
+    }),
+
     UserModule,
   ],
 })
