@@ -70,7 +70,7 @@ export class AppModule implements OnModuleInit {
         console.error('✗ Failed to connect:', err.message);
 
         retries--;
-               if (retries === 0) {
+        if (retries === 0) {
           console.error('✗ Out of retries — startup failed');
           throw err;
         }
