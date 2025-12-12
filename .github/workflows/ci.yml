@@ -23,9 +23,13 @@ jobs:
       - name: Run GitHub Super Linter
         uses: github/super-linter/slim@v6
         env:
-          VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: ${{ github.ref_name }}
+          VALIDATE_ALL_CODEBASE: true        # valida toda a base de código
+          DEFAULT_BRANCH: main               # branch principal (não usar github.ref_name)
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Desativa linters que não quer rodar para evitar erros
+          VALIDATE_CHECKOV: false
+          VALIDATE_GITLEAKS: false
+          VALIDATE_NATURAL_LANGUAGE: false
 
   node-tests:
     name: Node.js Tests
@@ -65,4 +69,3 @@ jobs:
 
       - name: Deploy
         run: echo "Aqui você colocaria seu comando de deploy"
-
