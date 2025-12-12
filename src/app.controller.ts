@@ -23,7 +23,7 @@ export class UserController {
   async findOne(@Param('id') id: string): Promise<any> {
     const userId = parseInt(id, 10);
     if (isNaN(userId)) {
-      throw new Error('ID inválido');
+      throw new Error('ID não encontrado ');
     }
 
     return this.userService.findOne(userId);
