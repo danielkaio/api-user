@@ -23,10 +23,12 @@ jobs:
       - name: Run GitHub Super Linter
         uses: github/super-linter/slim@v6
         env:
-          VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+           name: Run GitHub Super Linter
+  uses: github/super-linter/slim@v6
+  env:
+    VALIDATE_ALL_CODEBASE: true
+    DEFAULT_BRANCH: ${{ github.ref_name }}  # usa a branch atual
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   node-tests:
     name: Node.js Tests
     runs-on: ubuntu-latest
