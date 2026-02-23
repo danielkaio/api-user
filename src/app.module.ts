@@ -11,22 +11,20 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       envFilePath: '.env',
       isGlobal: true,
     }),
-
     SequelizeModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         dialect: 'mysql',
         host: config.get<string>('DB_HOST'),
-        port: config.get<number>('DB_PORT'),
+        port: Number(config.get<string>('DB_PORT')), // garante número
         username: config.get<string>('DB_USER'),
         password: config.get<string>('DB_PASS'),
         database: config.get<string>('DB_NAME'),
         models: [User],
         autoLoadModels: true,
-        synchronize: true,
-        sync: { force: true },
-        logging: console.log,
+        synchronize: true, // mantém criação automática
+        logging: false, // pode trocar para console.log se quiser ver queries
       }),
     }),
 
