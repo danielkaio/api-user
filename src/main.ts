@@ -5,10 +5,19 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-    .setTitle('users example')
-    .setDescription('The users API description')
-    .setVersion('1.0')
-    .addTag('users')
+    .setTitle('API de Usuários')
+    .setDescription(
+      'Documentação da API de usuários, incluindo autenticação JWT',
+    )
+    .setVersion('1.0.0')
+    .addTag('Usuarios')
+    // habilita campo de autorização para bearer token
+    .addBearerAuth({
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      description: 'Informe um token JWT obtido via /auth/login',
+    })
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);

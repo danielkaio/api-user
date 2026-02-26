@@ -2,6 +2,7 @@ import { Module, OnModuleInit } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './repository/UserRepository';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 import { Sequelize } from 'sequelize-typescript';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
@@ -29,6 +30,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
 
     UserModule,
+    // módulo de autenticação para /auth
+    AuthModule,
   ],
 })
 export class AppModule implements OnModuleInit {
