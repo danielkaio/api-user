@@ -23,8 +23,8 @@ export class AuthController {
           description: 'Nome de usuário',
         },
         id: {
-          type: 'string',
-          example: '123',
+          type: 'number',
+          example: '23',
           description: 'ID do usuário',
         },
       },
