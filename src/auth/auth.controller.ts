@@ -1,6 +1,7 @@
 import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { SignInDto } from './dto/sign-in.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -13,22 +14,17 @@ export class AuthController {
       'Realiza login do usuário com base em username e ID, retornando um token JWT',
   })
   @ApiBody({
-    description: 'Credenciais do usuário para login',
-    schema: {
-      type: 'object',
-      properties: {
-        username: {
-          type: 'string',
-          example: 'john_doe',
-          description: 'Nome de usuário',
-        },
-        id: {
-          type: 'number',
-          example: '23',
-          description: 'ID do usuário',
+    description: 'Dados necessários para autenticar o usuário',
+    type: SignInDto,
+    examples: {
+      basic: {
+        summary: 'Credenciais completas',
+        value: {
+          nome: 'john_doe',
+          email: 'john@example.com',
+          id: 23,
         },
       },
-      required: ['username', 'id'],
     },
   })
   @ApiResponse({
@@ -52,8 +48,11 @@ export class AuthController {
   })
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() signInDto: Record<string, any>) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return this.authService.signIn(signInDto.username, signInDto.id);
+  signIn(@Body() signInDto: SignInDto) {
+    return this.authService.signIn(
+      signInDto.nome,
+      signInDto.email,
+      signInDto.id,
+    );
   }
 }

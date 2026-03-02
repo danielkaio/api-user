@@ -10,7 +10,7 @@ export class AuthService {
   ) {}
 
   async signIn(
-    nome: string,
+    username: string,
     email: string,
     id: number,
   ): Promise<{ access_token: string }> {
@@ -20,8 +20,9 @@ export class AuthService {
     if (user?.id !== id) {
       throw new UnauthorizedException();
     }
+
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const payload = { sub: user.id, nome: user.nome, email: user.email };
+    const payload = { sub: user.id, username: user.nome, email: user.email };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
