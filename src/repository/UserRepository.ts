@@ -5,6 +5,9 @@ export class User extends Model {
   @Column
   nome: string;
 
+  @Column
+  email: string;
+
   @Column({ defaultValue: true })
   isactive: boolean;
 }

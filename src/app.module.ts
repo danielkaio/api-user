@@ -43,16 +43,15 @@ export class AppModule implements OnModuleInit {
     await this.sequelize.sync({ force: true });
     console.log('✓ Tables synchronized');
 
+    // populate initial users when application starts
     const userCount = await User.count();
     if (userCount === 0) {
-      console.log('Seeding database with initial data...');
+      console.log('Seeding database with initial data from app.module...');
       await User.bulkCreate([
-        { nome: 'John Doe', isactive: true },
-        { nome: 'Jane Doe', isactive: true },
+        { nome: 'John Doe', email: 'john.test@yahoo.com', isactive: true },
+        { nome: 'Jane Doe', email: 'jane.test@yahoo.com', isactive: true },
       ]);
-      console.log('✓ Database seeded successfully');
-    } else {
-      console.log(`✓ Database already populated with ${userCount} users`);
+      console.log('✓ Database seeded successfully from app.module');
     }
   }
 
