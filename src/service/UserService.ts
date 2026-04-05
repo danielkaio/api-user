@@ -28,10 +28,9 @@ export class UserService {
       throw new NotFoundException('usuario não encontrado ');
     }
   }
-  async findOne(id: number): Promise<any> {
-    const user = await this.UserModel.findOne<User>({
+  async findOne(id: number): Promise<User> {
+    const user = await this.UserModel.findOne({
       where: { id },
-      raw: true,
     });
 
     if (!user) {

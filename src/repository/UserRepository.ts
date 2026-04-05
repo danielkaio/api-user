@@ -1,13 +1,24 @@
-import { Column, Table, Model } from 'sequelize-typescript';
+import {
+  Column,
+  Table,
+  Model,
+  PrimaryKey,
+  AutoIncrement,
+} from 'sequelize-typescript';
 
 @Table
 export class User extends Model {
+  @PrimaryKey
+  @AutoIncrement
   @Column
-  nome: string;
+  declare id: number;
 
   @Column
-  email: string;
+  nome!: string;
+
+  @Column
+  email!: string;
 
   @Column({ defaultValue: true })
-  isactive: boolean;
+  isactive!: boolean;
 }
