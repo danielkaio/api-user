@@ -7,20 +7,22 @@ export class SignInDto {
     example: 'john_doe',
   })
   @IsString()
-  nome: string;
+  nome: string | undefined;
 
   @ApiProperty({
     description:
       'Endereço de e-mail do usuário (opcional para o cenário atual)',
     example: 'john@example.com',
   })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @IsEmail()
-  email: string;
+  email: string | undefined;
 
   @ApiProperty({
     description: 'ID numérico do usuário cadastrado',
     example: 23,
   })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @IsInt()
-  id: number;
+  id: number | undefined;
 }

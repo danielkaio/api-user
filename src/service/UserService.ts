@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from 'src/repository/UserRepository';
+import { User } from '../repository/UserRepository';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User)
-    private UserModel: typeof User,
+    private readonly UserModel: typeof User,
   ) {}
 
   async findAll(): Promise<User[]> {

@@ -1,4 +1,11 @@
-import { Body, Controller, Post, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
@@ -6,7 +13,7 @@ import { SignInDto } from './dto/sign-in.dto';
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @ApiOperation({
     summary: 'Autenticar usuário',
@@ -49,10 +56,15 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: SignInDto) {
+    const { nome, email, id } = signInDto;
+    if (nome === undefined || email === undefined || id === undefined) {
+      throw new BadRequestException('nome, email e id são obrigatórios');
+    }
+
     return this.authService.signIn(
-      signInDto.nome,
-      signInDto.email,
-      signInDto.id,
+      nome,
+      email,
+      id,
     );
   }
 }

@@ -1,9 +1,7 @@
 services:
   db:
     image: mysql:8
-    container_name: meu_mysql
-    env_file:
-      - .env
+    container_name: api-user-db
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
       MYSQL_DATABASE: ${DB_NAME}
@@ -13,3 +11,19 @@ services:
       - "${DB_PORT}:3306"
     volumes:
       - ./dados:/var/lib/mysql
+
+  api-user:
+    build:
+      context: ..
+      dockerfile: src/Dockerfile
+    container_name: api-user
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+    depends_on:
+      - db

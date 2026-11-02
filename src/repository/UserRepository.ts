@@ -14,11 +14,11 @@ export class User extends Model {
   declare id: number;
 
   @Column
-  nome!: string;
+  declare nome: string;
 
   @Column
-  email!: string;
+  declare email: string;
 
   @Column({ defaultValue: true })
-  isactive!: boolean;
+  declare isactive: boolean;
 }

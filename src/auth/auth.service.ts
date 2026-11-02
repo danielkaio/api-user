@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from 'src/service/UserService';
 import { JwtService } from '@nestjs/jwt';
+import { UserService } from '../service/UserService';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
-    private jwtService: JwtService,
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async signIn(
@@ -22,6 +24,7 @@ export class AuthService {
 
     const payload = { sub: user.id, username: user.nome, email: user.email };
     return {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       access_token: await this.jwtService.signAsync(payload),
     };
   }
