@@ -61,10 +61,6 @@ export class AuthController {
       throw new BadRequestException('nome, email e id são obrigatórios');
     }
 
-    return this.authService.signIn(
-      nome,
-      email,
-      id,
-    );
+    return this.authService.signIn(nome, email, id);
   }
 }
