@@ -35,12 +35,12 @@ describe('UserService', () => {
     expect(service).toBeDefined();
   });
 
-  /* it('findAll deve retornar usuários', async () => {
+  it('findAll deve retornar usuários', async () => {
     const result = await service.findAll();
     expect(result).toHaveLength(1);
     expect(result[0].nome).toBe('João');
   });
-*/
+
   it('deleteAll deve deletar todos os usuários', () => {
     service.deleteAll();
     expect(true).toBe(true);
