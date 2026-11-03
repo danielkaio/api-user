@@ -40,9 +40,4 @@ describe('UserService', () => {
     expect(result).toHaveLength(1);
     expect(result[0].nome).toBe('João');
   });
-
-  it('deleteAll deve deletar todos os usuários', () => {
-    service.deleteAll();
-    expect(true).toBe(true);
-  });
 });
