@@ -35,9 +35,19 @@ describe('UserService', () => {
     expect(service).toBeDefined();
   });
 
-  it('findAll deve  usuários', async () => {
-    const result = await service.findAll();
-    expect(result).toHaveLength(1);
-    expect(result[0].nome).toBe('João');
+  it('deve retornar todos os usuários', async () => {
+    const users = await service.findAll();
+    expect(users).toEqual([
+      {
+        id: 1,
+        nome: 'João',
+        isactive: true,
+      },
+    ]);
+  });
+
+  it('deve deletar todos os usuários', async () => {
+    const result = service.deleteAll();
+    expect(result).toBeUndefined();
   });
 });
